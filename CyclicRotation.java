@@ -44,12 +44,6 @@ each element of array A is an integer within the range [−1,000..1,000].
 In your solution, focus on correctness. The performance of your solution will not be the focus of the assessment.
 **/
 
-// you can also use imports, for example:
-// import java.util.*;
-
-// you can write to stdout for debugging purposes, e.g.
-// System.out.println("this is a debug message");
-
 class Solution {
     public int[] solution(int[] A, int K) {
        int[] result = new int[A.length];
