@@ -71,4 +71,19 @@ class Solution {
         return result;
         
     }
+  
+  //Not the most readable but apparently the most optimal solution using XOR
+  //#TODO need to revise bitwise operations
+  public int solution(int[] A) {
+        
+       // write your code in Java SE 8
+		int elem = 0;
+
+		for (int i = 0; i < A.length; i++) {
+			elem ^= A[i];
+		}
+		return elem;
+        
+    }
+  
 }
