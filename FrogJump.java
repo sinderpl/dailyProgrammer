@@ -30,16 +30,11 @@ expected worst-case space complexity is O(1).
 
 
 **/
+
 class Solution {
     public int solution(int X, int Y, int D) {
-        int jumpCounter = 0;
-        //Iterate through the jumps until the frog gets to the other side
-        while(X <= Y)
-        {
-            X += D;
-            jumpCounter++;
-        }
-        //We made it
-        return jumpCounter;
+        //This is for positive numbers only
+        //Rounds division numbers upwards
+        return ((Y-X) + D -1)/D;
     }
 }
