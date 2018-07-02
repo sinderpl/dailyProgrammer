@@ -46,3 +46,26 @@ class Solution {
         return result;
     }
 }
+
+//faster bitwise operation
+
+    public int solution(int[] A) {
+        int x1 = A[0];
+        int x2 = 1;
+        
+        //XOR all elements in the original array
+        for(int x = 1; x < A.length; x++)
+        {
+            x1 ^= A[x];
+        }
+        
+        //XOR all elements from 1 to N + 1
+        for(int x = 2; x <= A.length + 1; x++)
+        {
+            x2 ^= x;
+        }
+        
+        //Find and return the XOR of X1 and X2
+        return x1 ^ x2;
+    }
+}
