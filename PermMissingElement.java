@@ -28,7 +28,7 @@ expected worst-case time complexity is O(N);
 expected worst-case space complexity is O(1) (not counting the storage required for input arguments).
 **/
 
-//does not work for large numbers
+//does not work for large numbers, is fast
 class Solution {
     public int solution(int[] A) {
         int result;
@@ -47,7 +47,7 @@ class Solution {
     }
 }
 
-//faster bitwise operation
+//bitwise operation
 
     public int solution(int[] A) {
         int x1 = A[0];
@@ -68,4 +68,21 @@ class Solution {
         //Find and return the XOR of X1 and X2
         return x1 ^ x2;
     }
+
+//Actual maintainable solution, I forgot to initialize the initial length at N+2 :(
+
+public static int solution(int[] A) {
+  //Initialize new array plus two size
+		int[] results = new int[A.length+2];
+    
+		for (int x = 0; x < A.length; x++) {
+			results[A[x]] = 1;
+		}
+		for (int x = 1; x < counters.length; x++) {
+			if (results[x] == 0)
+				return x;
+		}
+		//no element is missing
+		return -1;
+	}
 }
