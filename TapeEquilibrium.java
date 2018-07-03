@@ -63,7 +63,7 @@ class Solution {
         
         
         //Keep summing up and comparing both sides to see which is larger
-        for(int x = 0; x < A.length; x++)
+        for(int x = 0; x < A.length-1; x++)
         {
             left += A[x];
             right -= A[x];
