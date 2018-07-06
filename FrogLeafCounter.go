@@ -9,15 +9,15 @@ package solution
 
 func Solution(X int, A []int) int {
 
-    value := 0;
+    tmp := 0;
     var leafPresent = make([]bool, X+1)
     
-    for index,_ := range A{
+    for index,value := range A{
         if !leafPresent[value] && value <= X{
             leafPresent[value] = true
-            value++
+            tmp++
         }
-        if value == X{
+        if tmp == X{
             return index
         }
     }
