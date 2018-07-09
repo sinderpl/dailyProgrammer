@@ -45,10 +45,16 @@ expected worst-case space complexity is O(1) (not counting the storage required 
 
 **/
 
+// you can also use imports, for example:
+// import java.util.*;
+import static java.lang.Math.toIntExact;
+// you can write to stdout for debugging purposes, e.g.
+// System.out.println("this is a debug message");
+
 class Solution {
     public int solution(int[] A) {
-        int zeroes = 0;
-        int total = 0;
+        long zeroes = 0;
+        long total = 0;
         
         for(int x = 0; x < A.length; x++)
         {
@@ -74,7 +80,7 @@ class Solution {
         }
         else
         {
-            return total;
+            return toIntExact(total);
         }
     }
 }
