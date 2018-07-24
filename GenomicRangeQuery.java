@@ -47,7 +47,6 @@ expected worst-case space complexity is O(N) (not counting the storage required 
 
 **/
 
-
 // you can also use imports, for example:
 // import java.util.*;
 
@@ -55,45 +54,70 @@ expected worst-case space complexity is O(N) (not counting the storage required 
 // System.out.println("this is a debug message");
 
 class Solution {
+    
+    //Uses prefix sums which are totals of all numbers before them
+    //Based on : https://stackoverflow.com/questions/19552754/java-codility-training-genomic-range-query
+    //My solution was less elegant, this helped me understand the problem
     public int[] solution(String S, int[] P, int[] Q) {
-       //Can we assume the two arrays are equal ?
-       
-       int[] results = new int[P.length];
-
-       for(int x = 0 ; x < P.length ; x++)
-       {
-           int smallestValue = 5;
-           int currentValue = 0;
-           String current = "";
-           
-           //Handles equal cases as substring defaults to empty
-           if(P[x] == Q[x])
-           {
-               current = Character.toString(S.charAt(P[x]));
-           }
-           else
-           {
-               current = (S.substring(P[x], Q[x]));
-           }
-           
-           for(String s : current.split(""))
-           {
-               //Matches corresponding impact factor to its string representation
-               switch(s)
-               {
-                   case "A":currentValue = 1; break;
-                   case "C":currentValue = 2; break;
-                   case "G":currentValue = 3; break;
-                   case "T":currentValue = 4; break;
-               }
-               if( currentValue < smallestValue)
-               {
-                   smallestValue = currentValue ;
-                   results[x] = currentValue;
-               }
-           }
-       }
-       
-       return results;
+        //Calculate the prefix sums
+        //Only need three as if none are matched then we are 
+        int [][] prefixSums = new int[3][S.length()+1];
+        
+        
+        int a ,c , g;
+        //Calculates the prefix sums for the genomes
+        for(int x  = 0 ; x < S.length(); x++)
+        {
+            a = 0;
+            c = 0;
+            g = 0;
+            
+            //Increase the corresponding counters
+            if('A' == (S.charAt(x)))
+            {
+                a++;
+            }
+            if('C' == (S.charAt(x)))
+            {
+                c++;   
+            }
+            if('G' == (S.charAt(x)))
+            {
+                g++;
+            }
+            
+            //Increase the prefix sums for ALL locations regardless if they were incremented
+            prefixSums[0][x+1] = prefixSums[0][x] + a;
+            prefixSums[1][x+1] = prefixSums[1][x] + c;
+            prefixSums[2][x+1] = prefixSums[2][x] + g;
+        }
+        
+        int[] minimalImpact = new int[P.length];
+        
+        
+        for(int x = 0; x < P.length ; x++)
+        {
+            int beginIndex = P[x];
+            int endIndex = Q[x]+1;
+            
+            if(prefixSums[0][endIndex] - prefixSums[0][beginIndex] > 0) //checks A
+            {
+                minimalImpact[x] = 1;
+            }
+            else if(prefixSums[1][endIndex] - prefixSums[1][beginIndex] > 0) //Checks C
+            {
+                minimalImpact[x] = 2;
+            }
+            else if(prefixSums[2][endIndex] - prefixSums[2][beginIndex] > 0) //Checks G
+            {
+                minimalImpact[x] = 3;
+            }
+            else //If Other ones are ignored the default is the largest T
+            {
+                minimalImpact[x] = 4;
+            }
+        }
+        
+        return minimalImpact;
     }
 }
