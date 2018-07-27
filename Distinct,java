@@ -31,6 +31,8 @@ expected worst-case space complexity is O(N) (not counting the storage required 
 // System.out.println("this is a debug message");
 
 class Solution {
+
+//Does not work for n < 0 silly mistake..
     public int solution(int[] A) {
         int[] sorted = new int[100000];
         int distinctValues = 0;
@@ -47,4 +49,14 @@ class Solution {
         }
         return distinctValues;
     }
+ //This is a correct solution from online
+ public static int solution(int[] A) {
+		  Arrays.sort(A);
+		  int dupl=0;
+		  for (int i = 1; i < A.length; i++) {
+			    if (A[i] == A[i-1])
+				   dupl++;
+		  }
+		 return A.length - dupl;
+	}
 }
