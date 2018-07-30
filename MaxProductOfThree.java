@@ -42,15 +42,6 @@ Complexity:
 expected worst-case time complexity is O(N*log(N));
 expected worst-case space complexity is O(1) (not counting the storage required for input arguments).
 
-
-
-
-
-
-
-
-
-
 **/
 // you can also use imports, for example:
 // import java.util.*;
@@ -61,6 +52,8 @@ import java.util.Arrays;
 class Solution {
     public int solution(int[] A) {
         Arrays.sort(A);
-        return A[A.length-1] * A[A.length-2] * A[A.length-3];
+        int maxA = A[A.length-1] * A[A.length-2] * A[A.length-3];
+        int maxB = A[A.length-1] * A[0] * A[1];
+        return maxA > maxB ? maxA : maxB;
     }
 }
