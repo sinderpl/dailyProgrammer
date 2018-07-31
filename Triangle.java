@@ -50,7 +50,7 @@ class Solution {
         Arrays.sort(A);
         for( int x = 2 ; x < A.length; x++)
         {
-            if(A[x] < A[x-2] + A[x-1])
+            if((long)A[x] < (long)A[x-2] + (long)A[x-1])
             {
                 return 1;
             }
