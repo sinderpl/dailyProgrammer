@@ -30,6 +30,8 @@ expected worst-case space complexity is O(1) (not counting the storage required 
 // System.out.println("this is a debug message");
 
 class Solution {
+    
+    //Not valid and not great solution, forgot to use stacks
     public int solution(String S) {
         if (S.length() <= 1)
         {
@@ -50,5 +52,33 @@ class Solution {
         }
         
         return leftBracket==rightBracket ? 1 : 0;
+    }
+    //THe actual solution
+    public int solution(String S) 
+    {
+        Stack<Character> brackets = new Stack<>();
+        
+        //Iterate over the brackets
+        for(int x = 0; x < S.length(); x++)
+        {
+            if(S.charAt(x) == '(')
+            {
+                //Adds the bracket to the stack
+                brackets.push('(');
+            }
+            else if(S.charAt(x) == ')' && brackets.size() > 0)
+            {
+                //If matching opening bracket was found pop the stack
+                brackets.pop();
+            }
+            else
+            {
+                //If a clsoing bracket had no opening bracket to match
+                //then the String is not properly nested
+                return 0;
+            }
+        }
+        
+        return brackets.size() == 0 ? 1: 0;
     }
 }
