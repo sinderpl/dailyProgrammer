@@ -61,4 +61,43 @@ class Solution {
         
         return brackets.size() == 0 ? 1 : 0;
     }
+    
+    
+    //Original solution was too slow
+    public int solution(String S) {
+        Stack<Character> brackets = new Stack<>();
+        
+        
+        for(int x = 0; x < S.length(); x++)
+        {
+            //If there is no brackets in the stack we can assume its a starting one
+            if(brackets.size() == 0)
+            {
+                brackets.push(S.charAt(x));
+            }
+            else
+            {
+                if(isNested(brackets.peek(),  S.charAt(x)))
+                {
+                    brackets.pop();   
+                }
+                else
+                {
+                    brackets.push(S.charAt(x));
+                }
+            }
+        }
+        return brackets.size() == 0 ? 1 : 0;
+    }
+    
+    private boolean isNested(char beginning, char end)
+    {
+        switch(beginning)
+        {
+            case '(' :  return end == ')';
+            case '{' :  return end == '}';
+            case '[' :  return end == ']';
+            default: return false;
+        }
+    }
 }
